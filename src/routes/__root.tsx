@@ -78,14 +78,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Carbon Twin" },
+      { name: "description", content: "CarbonTwin AI predicts and helps users reduce their carbon footprint with personalized insights and actionable plans." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Carbon Twin" },
+      { property: "og:description", content: "CarbonTwin AI predicts and helps users reduce their carbon footprint with personalized insights and actionable plans." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Carbon Twin" },
+      { name: "twitter:description", content: "CarbonTwin AI predicts and helps users reduce their carbon footprint with personalized insights and actionable plans." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3dc4e5c9-84d7-40da-8d18-bc5a51d4c712/id-preview-a2932049--21c6c0de-ea19-43bb-9def-87241469b70f.lovable.app-1781631122066.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3dc4e5c9-84d7-40da-8d18-bc5a51d4c712/id-preview-a2932049--21c6c0de-ea19-43bb-9def-87241469b70f.lovable.app-1781631122066.png" },
     ],
     links: [
       {
