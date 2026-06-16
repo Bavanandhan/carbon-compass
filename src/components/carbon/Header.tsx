@@ -6,6 +6,10 @@
 
 import { useState } from "react";
 import { clsx } from "clsx";
+import { useNavigate } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface NavItem {
   id: string;
@@ -29,6 +33,30 @@ interface HeaderProps {
 
 export function Header({ activeSection, onNavigate }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { data: profile } = useQuery({
+    queryKey: ["profile"],
+    queryFn: async () => {
+      const { data: userData } = await supabase.auth.getUser();
+      if (!userData.user) return null;
+      const { data } = await supabase
+        .from("profiles")
+        .select("display_name, avatar_url")
+        .eq("id", userData.user.id)
+        .maybeSingle();
+      return data ?? { display_name: userData.user.email ?? "Explorer", avatar_url: null };
+    },
+  });
+
+  const handleSignOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    toast.success("Signed out");
+    navigate({ to: "/auth", replace: true });
+  };
 
   return (
     <header
@@ -83,6 +111,23 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
               ))}
             </ul>
           </nav>
+
+          {/* Account actions (desktop) */}
+          <div className="hidden items-center gap-2 md:flex">
+            {profile?.display_name && (
+              <span className="text-sm text-carbon-600" aria-label="Signed in as">
+                {profile.display_name}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="rounded-lg border border-carbon-200 px-3 py-1.5 text-sm font-medium text-carbon-700 transition hover:bg-carbon-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500"
+            >
+              Sign out
+            </button>
+          </div>
+
 
           {/* Mobile menu button */}
           <button
@@ -153,6 +198,19 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
               </button>
             </li>
           ))}
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                handleSignOut();
+              }}
+              className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-carbon-600 hover:bg-carbon-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500"
+            >
+              <span aria-hidden="true">🚪</span>
+              Sign out
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
