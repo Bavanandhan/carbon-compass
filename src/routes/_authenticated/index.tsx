@@ -62,7 +62,7 @@ function Home() {
                 Personalised Climate Intelligence
               </p>
               <h1 className="mt-1 text-2xl font-bold sm:text-3xl">
-                Welcome back {store.profile?.name ?? "Explorer"}\u00a0👋
+                Welcome back\u00a0
               </h1>
               <p className="mt-2 text-forest-100">
                 Your monthly footprint:{" "}
