@@ -198,6 +198,19 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
               </button>
             </li>
           ))}
+          <li>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                handleSignOut();
+              }}
+              className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-carbon-600 hover:bg-carbon-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500"
+            >
+              <span aria-hidden="true">🚪</span>
+              Sign out
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
