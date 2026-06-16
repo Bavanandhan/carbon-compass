@@ -6,6 +6,10 @@
 
 import { useState } from "react";
 import { clsx } from "clsx";
+import { useNavigate } from "@tanstack/react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface NavItem {
   id: string;
