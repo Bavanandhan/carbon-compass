@@ -8,7 +8,7 @@ import { CarbonDNAProfile } from "@/components/carbon/CarbonDNAProfile";
 import { AICoach } from "@/components/carbon/AICoach";
 import { useCarbonStore } from "@/hooks/useCarbonStore";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "CarbonTwin AI — Predict Your Carbon Footprint Before It Happens" },
