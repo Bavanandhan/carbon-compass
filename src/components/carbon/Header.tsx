@@ -112,6 +112,23 @@ export function Header({ activeSection, onNavigate }: HeaderProps) {
             </ul>
           </nav>
 
+          {/* Account actions (desktop) */}
+          <div className="hidden items-center gap-2 md:flex">
+            {profile?.display_name && (
+              <span className="text-sm text-carbon-600" aria-label="Signed in as">
+                {profile.display_name}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="rounded-lg border border-carbon-200 px-3 py-1.5 text-sm font-medium text-carbon-700 transition hover:bg-carbon-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-forest-500"
+            >
+              Sign out
+            </button>
+          </div>
+
+
           {/* Mobile menu button */}
           <button
             type="button"
