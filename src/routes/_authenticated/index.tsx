@@ -6,7 +6,12 @@ import { WhatIfSimulator } from "@/components/carbon/WhatIfSimulator";
 import { ActionPlan } from "@/components/carbon/ActionPlan";
 import { CarbonDNAProfile } from "@/components/carbon/CarbonDNAProfile";
 import { AICoach } from "@/components/carbon/AICoach";
+import { Roadmap } from "@/components/carbon/Roadmap";
+import { CarbonBudget } from "@/components/carbon/CarbonBudget";
+import { DecisionMatrix } from "@/components/carbon/DecisionMatrix";
+import { SavingsTracker } from "@/components/carbon/SavingsTracker";
 import { useCarbonStore } from "@/hooks/useCarbonStore";
+import { useProfile } from "@/hooks/useProfile";
 
 export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
@@ -28,11 +33,22 @@ export const Route = createFileRoute("/_authenticated/")({
   component: Home,
 });
 
-type Section = "dashboard" | "simulator" | "actions" | "profile" | "coach";
+type Section =
+  | "dashboard"
+  | "roadmap"
+  | "budget"
+  | "matrix"
+  | "savings"
+  | "simulator"
+  | "actions"
+  | "profile"
+  | "coach";
 
 function Home() {
   const [activeSection, setActiveSection] = useState<Section>("dashboard");
   const store = useCarbonStore();
+  const { data: profile } = useProfile();
+  const displayName = profile?.display_name ?? "Explorer";
 
   const handleNavigate = (section: string) => {
     setActiveSection(section as Section);
@@ -62,7 +78,7 @@ function Home() {
                 Personalised Climate Intelligence
               </p>
               <h1 className="mt-1 text-2xl font-bold sm:text-3xl">
-                Welcome back\u00a0
+                {`Welcome back ${displayName}\u00a0👋`}
               </h1>
               <p className="mt-2 text-forest-100">
                 Your monthly footprint:{" "}
@@ -85,6 +101,10 @@ function Home() {
 
         <div className="animate-fade-in">
           {activeSection === "dashboard" && <Dashboard store={store} />}
+          {activeSection === "roadmap" && <Roadmap store={store} />}
+          {activeSection === "budget" && <CarbonBudget store={store} />}
+          {activeSection === "matrix" && <DecisionMatrix store={store} />}
+          {activeSection === "savings" && <SavingsTracker store={store} />}
           {activeSection === "simulator" && <WhatIfSimulator />}
           {activeSection === "actions" && <ActionPlan store={store} />}
           {activeSection === "profile" && <CarbonDNAProfile store={store} />}
