@@ -20,6 +20,10 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { id: "dashboard", label: "Dashboard", icon: "📊", href: "#dashboard" },
+  { id: "roadmap", label: "Roadmap", icon: "🗺️", href: "#roadmap" },
+  { id: "budget", label: "Budget", icon: "💰", href: "#budget" },
+  { id: "matrix", label: "Decisions", icon: "⚖️", href: "#matrix" },
+  { id: "savings", label: "Savings", icon: "🌱", href: "#savings" },
   { id: "simulator", label: "Simulator", icon: "🔮", href: "#simulator" },
   { id: "actions", label: "Actions", icon: "✅", href: "#actions" },
   { id: "profile", label: "Carbon DNA", icon: "🧬", href: "#profile" },
