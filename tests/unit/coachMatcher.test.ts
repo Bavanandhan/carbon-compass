@@ -11,7 +11,7 @@ describe("detectIntent", () => {
     ["How do I compare to UK average?", "comparison"],
     ["Paris target?", "paris-target"],
     ["Trees to offset?", "trees-offset"],
-    ["Reduce heating at home", "energy"],
+    ["Reduce electricity at home", "energy"],
     ["Tips for shopping less", "consumption"],
   ] as const)("maps %j → %s", (question, expected) => {
     expect(detectIntent(question)).toBe(expected);
