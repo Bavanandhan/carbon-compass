@@ -29,7 +29,7 @@ describe("generateCoachResponse", () => {
   });
 
   it("energy quotes energy emissions", () => {
-    expect(generateCoachResponse("home heating?", ctx)).toContain("200 kg");
+    expect(generateCoachResponse("electricity bill?", ctx)).toContain("200 kg");
   });
 
   it("consumption quotes consumption emissions", () => {
